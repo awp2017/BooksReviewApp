@@ -1,5 +1,6 @@
  {% extends 'BooksReviewApp/Menu.html' %}
     {% block content %}
+    <div class=center>
     {% if form.errors %}
         <div class="alert alert-danger" role="alert">
             {{ form.errors }}
@@ -16,6 +17,7 @@
             </div>
             </form>
         </div>
+    </div>
     {% endblock %}
 
 
