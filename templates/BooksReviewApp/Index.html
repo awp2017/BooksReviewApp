@@ -2,15 +2,5 @@
 
 {% block content %}
 <h1>Welcome to Books Review</h1>
-    {% for book in book_list %}
-        <div class="book">
-            <div>
-                {{ book.name }}
-            </div>
-            <h1><a href="">{{ book.name }}</a></h1>
-            <p>{{ book.writers }}</p>
-        </div>
-    {% empty %}
-        <li>No books yet.</li>
-    {% endfor %}
+ 
 {% endblock %}
