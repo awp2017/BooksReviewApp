@@ -4,6 +4,6 @@ from .views import BooksListView
 
 
 urlpatterns = [
-    url(r'', BooksListView.as_view(), name='book_list'),
-    
+    url(r'^Search/$', views.SearchView.as_view(), name='search'),
+    url(r'', BooksListView.as_view(), name='book_list')
 ]
