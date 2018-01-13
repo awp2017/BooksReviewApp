@@ -7,18 +7,20 @@ from BooksReviewApp.models import Review
 from BooksReviewApp.models import Comment
 from .dan_views import WriterHelper
 
-class SearchView(ListView):
+class SearchView(ListView, WriterHelper):
     
     def get(self, request):
         books = []
         books_review = []
+        writer_list = []
         if request.GET.get('q'):
             book_name = request.GET.get('q')
             books = Book.objects.all().filter(name__icontains=book_name)
             for review in Review.objects.all():
                 if review.book_pk in books:
                     books_review.append(review)
-        return render(request, 'BooksReviewApp/Search.html', {"books_review":books_review})
+        writer_list = Writer.objects.order_by('-name')
+        return render(request, 'BooksReviewApp/Search.html', {"books_review":books_review, "writer_list":writer_list})
 
 
 
