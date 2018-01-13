@@ -1,0 +1,13 @@
+.author_list
+{
+    clear : left;
+    float : left;
+    border-style: solid;
+    border-color : black;
+    overflow: auto;
+    height: 100%;
+    padding: 5px;
+    margin-top: -20px;
+    margin-left: 0px;
+    background: #C0C0C0;
+}
