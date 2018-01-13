@@ -14,7 +14,7 @@
               <a class="navbar-brand" href="{% url 'home' %}">BooksReview</a>
             </div>
             <ul class="nav navbar-nav">
-              <li><a href="#">Top Books</a></li>
+              <li><a href="{% url 'topbooks' %}">Top Books</a></li>
               {% if user.is_authenticated %}
                {% if user.is_superuser %}
                       <li><a href="{% url 'approverequest' %}">Approve Request</a></li>

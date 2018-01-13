@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^Search/$', views.SearchView.as_view(), name='search'),
     url(r'^Reviews/(?P<author_id>\d+)/$',views.BooksOfWriter.as_view(), name='reviews'),
     url(r'^Details/(?P<review_id>\d+)/$',views.ReviewList.as_view(), name='details'),
-    url(r'', views.HomeView.as_view(), name='home')
+    url(r'^TopBooks/$', views.TopBooks.as_view(), name='topbooks'),
+    url(r'', views.HomeView.as_view(), name='home'),
 ]

@@ -20,3 +20,14 @@ class HomeView(ListView, WriterHelper):
         context['writer_list'] = self.getWriters()
         
         return context
+
+class TopBooks(ListView, WriterHelper):
+    model = Book
+    context_object_name = 'top_book_list'
+    queryset = Book.objects.order_by('-name')[:10]
+    template_name = 'BooksReviewApp/topbooks.html'
+    def get_context_data(self, **kwargs):
+        context = super(TopBooks,self).get_context_data()
+        context['writer_list'] = self.getWriters()
+        
+        return context
