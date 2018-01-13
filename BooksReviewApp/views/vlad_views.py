@@ -13,7 +13,7 @@ from .forms import LoginForm, BookRequestForm
 class SignUpView ( CreateView ) :    
     form_class = UserCreationForm
     template_name = 'BooksReviewApp/signup.html'
-    success_url = reverse_lazy( 'SignIn' )
+    success_url = reverse_lazy( 'log-user' )
     
     
 class SignInView(View):
@@ -31,13 +31,13 @@ class SignInView(View):
             if user:
                 login(request=request,
                       user=user)
-                return redirect('BooksReviewApp/home')
+                return redirect('home')
             else:
                 context['error_message'] = 'Wrong username or password!'
         form = LoginForm()
         context['form'] = form
         context['error'] = 1
-        return render(request, 'BooksReviewApp/signin.html', context)
+        return render(request, 'BooksReviewApp/Index.html', context)
         
 
 class LogoutView(View):
