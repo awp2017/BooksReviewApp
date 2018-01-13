@@ -1,0 +1,22 @@
+div.container {
+background-color: #ffffff;
+width: 970px
+}
+div.container p {
+font-family: Arial;
+font-size: 14px;
+font-style: normal;
+font-weight: normal;
+text-decoration: none;
+text-transform: none;
+color: #000000;
+background-color: #ffffff;
+}
+.review{
+    border: 2px solid #000000;
+    border-radius: 5px;
+}
+
+.review_content{
+margin-left: 5px;
+}

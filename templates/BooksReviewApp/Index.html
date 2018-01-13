@@ -1,6 +1,23 @@
 {% extends 'BooksReviewApp/Menu.html' %}
 
 {% block content %}
-<h1>Welcome to Books Review</h1>
- 
+<div class="container">
+    <h1>Welcome to Books Review</h1>
+    <p>      A book review is a form of literary criticism in which a book is analyzed based on content, style, and merit. A book review may be a primary source, opinion piece, summary review or scholarly review. Books can be reviewed for printed periodicals, magazines and newspapers, as school work, or for book web sites on the Internet. A book review's length may vary from a single paragraph to a substantial essay. Such a review may evaluate the book on the basis of personal taste. Reviewers may use the occasion of a book review for an extended essay that can be closely or loosely related to the subject of the book, or to promulgate their own ideas on the topic of a fiction or non-fiction work.</p>
+    <h2>Last reviews</h2>
+    <div class="reviews">
+        {% for review in review_list %}
+            <div class="review">
+                <div class="review_content">
+                    <p>{{review.book_pk.name}}</p>
+                    <p>{{ review.review_text }}</p>
+                    <p>{{ review.date }}</p>
+                    <p></p><a href="{% url 'search' %}">More</a></p>
+                </div>
+            </div>
+        {% empty %}
+            <li>No reviews yet.</li>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
