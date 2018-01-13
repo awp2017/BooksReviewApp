@@ -2,7 +2,7 @@
     {% block content %}
         
         <div class="reviews">
-        {% for review in review_list %}
+        {% for review in books_review %}
             <div class="review">
                 <div class="review_content">
                     <p>{{ review.book_pk.name }}</p>
