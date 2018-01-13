@@ -113,3 +113,8 @@ class AcceptRequestView(LoginRequiredMixin, CreateView,  WriterHelper):
         return super(AcceptRequestView, self).form_valid(form)
         
 
+class DeleteRequest(DeleteView):
+    template_name = 'BooksReviewApp/delete.html'
+    model = BookRequest
+    success_url = reverse_lazy('home')
+    

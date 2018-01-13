@@ -15,12 +15,22 @@ class BookRequestForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
+    review_text =  forms.CharField(label='review_text', widget=forms.Textarea)
     class Meta(object):
         model = Review
-        fields = ['book_pk', 'review_text', 'rating']
+        fields = ['book_pk', 'rating']
     
+    
+
     """
         def __init__(self, *args, **kwargs):
             super(ReviewForm , self).__init__(*args, **kwargs)
             self.fields['book_pk'].intial = kwargs['book_pk']
     """
+    
+    
+    
+class CommentForm(forms.Form):
+    author = forms.CharField(label='author')
+    book = forms.CharField(label='book name')
+    text = forms.CharField(label='recenzie', widget=forms.Textarea)
