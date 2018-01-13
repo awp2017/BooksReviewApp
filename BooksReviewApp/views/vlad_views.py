@@ -6,9 +6,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.views.generic import    View, TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import LoginForm, BookRequestForm
+from ..models import BookRequest
+from .dan_views import WriterHelper
 
 class SignUpView (CreateView) :    
     form_class = UserCreationForm
@@ -46,12 +48,39 @@ class LogoutView(View):
         return redirect('log-user')
 
 
-class SendRequestView(LoginRequiredMixin, CreateView):
+class SendRequestView(LoginRequiredMixin, CreateView, WriterHelper):
     form_class = BookRequestForm
     template_name = 'BooksReviewApp/sendrequest.html'
     success_url = reverse_lazy('home')
     login_url = "log-user"
-    def get_initial(self):
-        return {
-            "author": self.request.user
-        }
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(SendRequestView, self).form_valid(form)
+        
+    def get_context_data(self, **kwargs):
+        
+        context = super(SendRequestView,self).get_context_data()
+        context['writers_list'] = self.getWriters()
+        
+        return context
+        
+class ApproveRequestView(LoginRequiredMixin, ListView,  WriterHelper):
+
+    model = BookRequest
+    context_object_name = 'request_list'
+    template_name = 'BooksReviewApp/requests.html'
+    login_url = "log-user"
+    def get(self, request, *args, **kwargs):
+        
+        if self.request.user.has_perm('BooksReviewApp.add_Review'):
+            return super(ApproveRequestView,self).get(self, request, *args, **kwargs)
+        
+        return redirect('home')
+    
+    def get_context_data(self, **kwargs):
+        
+        context = super(ApproveRequestView,self).get_context_data()
+        context['writer_list'] = self.getWriters()
+       
+        
+        return context

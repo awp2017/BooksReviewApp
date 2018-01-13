@@ -16,9 +16,9 @@
               <li><a href="#">Top Books</a></li>
               {% if user.is_authenticated %}
                {% if user.is_superuser %}
-                      <li><a href="{% url 'sendrequest' %}">Approve Request</a></li>
+                      <li><a href="{% url 'approverequest' %}">Approve Request</a></li>
                {% else %}
-                      <li><a href="">Send Request</a></li>
+                      <li><a href="{% url 'sendrequest' %}">Send Request</a></li>
                {% endif %}
               {% endif %}
             </ul>

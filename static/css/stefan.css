@@ -1,5 +1,10 @@
 .center
 {
-    float:right;
-    margin-left:60%;
+    float:left;    
+    margin-left:21%;
+}
+
+#marg {
+    margin:20px !important;
+
 }
