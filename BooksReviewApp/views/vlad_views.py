@@ -10,7 +10,7 @@ from django.views.generic import    View, TemplateView, ListView, DetailView, Cr
 from django.urls import reverse_lazy
 from .forms import LoginForm, BookRequestForm
 
-class SignUpView ( CreateView ) :    
+class SignUpView (CreateView) :    
     form_class = UserCreationForm
     template_name = 'BooksReviewApp/signup.html'
     success_url = reverse_lazy( 'log-user' )
@@ -33,20 +33,25 @@ class SignInView(View):
                       user=user)
                 return redirect('home')
             else:
+                context['error'] = 1
                 context['error_message'] = 'Wrong username or password!'
         form = LoginForm()
         context['form'] = form
-        context['error'] = 1
         return render(request, 'BooksReviewApp/Index.html', context)
         
 
 class LogoutView(View):
     def get(self, request, *args, **kwargs):
         logout(request)
-        return redirect('login')
+        return redirect('log-user')
 
 
-class SendRequestView(CreateView):
+class SendRequestView(LoginRequiredMixin, CreateView):
     form_class = BookRequestForm
     template_name = 'BooksReviewApp/sendrequest.html'
     success_url = reverse_lazy('home')
+    login_url = "log-user"
+    def get_initial(self):
+        return {
+            "author": self.request.user
+        }
