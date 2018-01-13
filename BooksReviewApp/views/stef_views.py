@@ -7,7 +7,7 @@ from BooksReviewApp.models import Review
 from BooksReviewApp.models import Comment
 from .dan_views import WriterHelper
 
-class SearchView(ListView):
+class SearchView(ListView, WriterHelper):
     
     def get(self, request):
         books = []
@@ -19,6 +19,11 @@ class SearchView(ListView):
                 if review.book_pk in books:
                     books_review.append(review)
         return render(request, 'BooksReviewApp/Search.html', {"books_review":books_review})
+    def get_context_data(self, **kwargs):
+        context = super(SearchView,self).get_context_data()
+        context['writer_list'] = self.getWriters()
+        
+        return context
 
 
 
