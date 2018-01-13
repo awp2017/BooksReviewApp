@@ -44,9 +44,11 @@
           </div>
         </nav>
         <div class = "author_list">
+          <ul>
           {% for writer in writer_list %}
-                <a href="%"> {{   writer }} </a>
+                <li class ="a"><a href="{% url 'reviews' writer.id %}"> {{ writer }} </a></li>
           {% endfor %}
+          </ul>
         </div>
         <div>
             {% block content %}

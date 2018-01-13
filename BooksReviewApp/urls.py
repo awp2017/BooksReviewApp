@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from .views import HomeView
+
 
 urlpatterns = [
     url(r'^ApproveRequest/$', views.ApproveRequestView.as_view(), name='approverequest'),
@@ -9,6 +9,6 @@ urlpatterns = [
     url(r'^SignIn/$', views.SignInView.as_view(), name='log-user'),
     url(r'^LogOut/$', views.LogoutView.as_view(), name='logout'),
     url(r'^Search/$', views.SearchView.as_view(), name='search'),
-    url(r'', HomeView.as_view(), name='home'),
-
+    url(r'^Reviews/(?P<author_id>\d+)/$',views.BooksOfWriter.as_view(), name='reviews'),
+    url(r'', views.HomeView.as_view(), name='home')
 ]
