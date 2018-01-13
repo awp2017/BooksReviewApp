@@ -17,9 +17,9 @@
               <li><a href="#">Top Books</a></li>
               {% if user.is_authenticated %}
                {% if user.is_superuser %}
-                      <li><a href="{% url 'sendrequest' %}">Approve Request</a></li>
+                      <li><a href="#">Approve Request</a></li>
                {% else %}
-                      <li><a href="">Send Request</a></li>
+                      <li><a href="{% url 'sendrequest' %}">Send Request</a></li>
                {% endif %}
               {% endif %}
             </ul>
@@ -44,11 +44,11 @@
           </div>
         </nav>
         <div class = "author_list">
+          <ul>
           {% for writer in writer_list %}
-                <ul>
-                    <li><a href="%"> {{   writer }} </a></li>
-                </ul>
+                <li class ="a"><a href="{% url 'reviews' writer.id %}"> {{ writer }} </a></li>
           {% endfor %}
+          </ul>
         </div>
         <div>
             {% block content %}
