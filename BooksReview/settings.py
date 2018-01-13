@@ -25,7 +25,7 @@ SECRET_KEY = '@d!kl$o9s3#*-fb9ty322)x)j+m+#7uyg3w9-_df!+y*=lmq13'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['my-workspace-vladeugeniu.c9users.io', "python1-stefchituc.c9users.io", "books-review-app-danodobescu.c9users.io/"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
