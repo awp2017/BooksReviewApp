@@ -30,7 +30,7 @@ class BookRequest(models.Model):
         return self.author.username + " asks for: " + self.writer + " " + self.book_name
 
 class Review(models.Model):
-    author_pk = models.ForeignKey('auth.User')
+    author_pk =  models.ForeignKey(User, on_delete=models.CASCADE)
     book_pk = models.ForeignKey(Book, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     review_text = models.CharField(max_length=1000)
@@ -40,7 +40,7 @@ class Review(models.Model):
         return self.review_text
 
 class Comment(models.Model):
-    user_pk = models.ForeignKey('auth.User')
+    user_pk = models.ForeignKey(User, on_delete=models.CASCADE)
     review_pk = models.ForeignKey(Review, on_delete=models.CASCADE)
     comm_text = models.CharField(max_length=500)
     date = models.DateTimeField(auto_now_add=True)

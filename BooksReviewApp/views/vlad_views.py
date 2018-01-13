@@ -8,8 +8,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .forms import LoginForm, BookRequestForm
-from ..models import BookRequest
+from .forms import LoginForm, BookRequestForm, ReviewForm
+from ..models import BookRequest, Book, Writer
 from .dan_views import WriterHelper
 
 class SignUpView (CreateView) :    
@@ -84,3 +84,33 @@ class ApproveRequestView(LoginRequiredMixin, ListView,  WriterHelper):
        
         
         return context
+
+
+class AcceptRequestView(LoginRequiredMixin, CreateView,  WriterHelper):
+
+    model = BookRequest
+    template_name = 'BooksReviewApp/AddReview.html'
+    login_url = "log-user"
+    form_class = ReviewForm
+    success_url = reverse_lazy('home')
+    def get(self, request, *args, **kwargs):
+        req = BookRequest.objects.get(id=self.kwargs['pk'])
+        book = Book()
+        writer = Writer()
+        writer.name = req.writer
+        writer.save()
+        book.name = req.book_name
+        book.save()
+        book.writers.add(writer)
+        book.save()
+        req.delete()
+        if self.request.user.has_perm('BooksReviewApp.add_Review'):
+            return super(AcceptRequestView,self).get(self, request, *args, **kwargs)
+        return redirect('home')
+
+    
+    def form_valid(self, form):
+        form.instance.author_pk = self.request.user
+        return super(AcceptRequestView, self).form_valid(form)
+        
+

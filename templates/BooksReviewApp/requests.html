@@ -6,11 +6,11 @@
  
      
 <table class=center cellspacing="100">
- {% for review in request_list %}
+ {% for req in request_list %}
   <tr>
-    <td>  {{ review }} </td>
-    <td>  <a href="{% url 'create-user' %}" type="button" id = "marg" class="btn btn-primary">Approve</a> </td>
-    <td>  <a href="{% url 'create-user' %}" type="button" class="btn btn-danger">Delete</a> </td> 
+    <td>  {{ req }} </td>
+    <td>  <a href="{% url 'create-review1' req.id %}" type="button" id = "marg" class="btn btn-primary">Approve</a> </td>
+    <td>  <a href="{% url 'create-user'  %}" type="button" class="btn btn-danger">Delete</a> </td> 
   </tr>
    {% endfor %}
 </table>

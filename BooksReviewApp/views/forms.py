@@ -1,5 +1,5 @@
 from django import forms
-from ..models import BookRequest
+from ..models import BookRequest, Review
 
 
 class LoginForm(forms.Form):
@@ -11,3 +11,16 @@ class BookRequestForm(forms.ModelForm):
     class Meta(object):
         model = BookRequest
         fields = ['writer','book_name']
+
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta(object):
+        model = Review
+        fields = ['book_pk', 'review_text', 'rating']
+    
+    """
+        def __init__(self, *args, **kwargs):
+            super(ReviewForm , self).__init__(*args, **kwargs)
+            self.fields['book_pk'].intial = kwargs['book_pk']
+    """
