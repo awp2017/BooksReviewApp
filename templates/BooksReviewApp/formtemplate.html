@@ -12,13 +12,15 @@
     <div class="form-group">
          {% if field.name == 'password1' or field.name == 'password2' or field.name == 'password' %}
              Password
-         {% endif %}
+         {% else %}
                          
+             {% if field.name == 'username' %}
+                 Username
+             {% else %}
+              {{ field.name }}
+             {% endif %}
+        {% endif %}
                          
-         {% if field.name == 'username' %}
-             Username
-         {% endif %}
-                     
         {{field}}
     </div>
 {% endfor %}

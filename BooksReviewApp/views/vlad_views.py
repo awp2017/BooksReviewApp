@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import    View, TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .forms import LoginForm 
+from .forms import LoginForm, BookRequestForm
 
 class SignUpView ( CreateView ) :    
     form_class = UserCreationForm
@@ -38,3 +38,15 @@ class SignInView(View):
         context['form'] = form
         context['error'] = 1
         return render(request, 'BooksReviewApp/signin.html', context)
+        
+
+class LogoutView(View):
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('login')
+
+
+class SendRequestView(CreateView):
+    form_class = BookRequestForm
+    template_name = 'BooksReviewApp/sendrequest.html'
+    success_url = reverse_lazy('home')
