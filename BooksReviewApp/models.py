@@ -34,6 +34,7 @@ class Review(models.Model):
     book_pk = models.ForeignKey(Book, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     review_text = models.CharField(max_length=1000)
+    rating = models.IntegerField()
     
     def __str__(self):
         return self.review_text
