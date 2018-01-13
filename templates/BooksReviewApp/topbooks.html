@@ -1,0 +1,17 @@
+{% extends 'BooksReviewApp/Menu.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Top books</h1>
+        {% for book in top_book_list %}
+            <div class="topbooks">
+                <div>
+                    {{ book.name }}
+                </div>
+            </div>
+        {% empty %}
+            <li>No books yet.</li>
+        {% endfor %}
+</div>
+
+{% endblock %}
