@@ -12,11 +12,10 @@ from .forms import LoginForm, BookRequestForm, ReviewForm
 from ..models import BookRequest, Book, Writer
 from .dan_views import WriterHelper
 
-class SignUpView (CreateView) :    
+class SignUpView (CreateView, WriterHelper) :    
     form_class = UserCreationForm
     template_name = 'BooksReviewApp/signup.html'
     success_url = reverse_lazy( 'log-user' )
-    
     
 class SignInView(View):
     
@@ -39,6 +38,7 @@ class SignInView(View):
                 context['error_message'] = 'Wrong username or password!'
         form = LoginForm()
         context['form'] = form
+        context['writer_list'] = Writer.objects.all()
         return render(request, 'BooksReviewApp/Index.html', context)
         
 
@@ -46,7 +46,6 @@ class LogoutView(View):
     def get(self, request, *args, **kwargs):
         logout(request)
         return redirect('log-user')
-
 
 class SendRequestView(LoginRequiredMixin, CreateView, WriterHelper):
     form_class = BookRequestForm
