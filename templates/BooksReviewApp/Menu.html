@@ -13,7 +13,13 @@
             </div>
             <ul class="nav navbar-nav">
               <li><a href="#">Top Books</a></li>
-              <li><a href="#">Request Book Review</a></li>
+              {% if user.is_authenticated %}
+               {% if user.is_superuser %}
+                      <li><a href="#">Approve Request</a></li>
+               {% else %}
+                      <li><a href="#">Send Request</a></li>
+               {% endif %}
+              {% endif %}
             </ul>
             <form class="navbar-form navbar-left" action="{% url 'search' %}">
               <div class="input-group">
@@ -26,9 +32,12 @@
               </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="{% url 'create-user' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-              <li><a href="{% url 'log-user' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+              {% if user.is_authenticated %}
+               <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+              {% else %}
+               <li><a href="{% url 'create-user' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+               <li><a href="{% url 'log-user' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              {% endif %}
             </ul>
           </div>
         </nav>
