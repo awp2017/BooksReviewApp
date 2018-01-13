@@ -1,17 +1,18 @@
 {% extends 'BooksReviewApp/Menu.html' %}
     {% block content %}
-        
-        <div class="reviews">
+    <div class="reviews">
         {% for review in review_list %}
             <div class="review">
                 <div class="review_content">
                     <p>{{ review.book_pk.name }}</p>
                     <p>{{ review.date }}</p>
+                    <p></p><a href="{% url 'details' review.id %}">More</a></p>
                 </div>
             </div>
         {% empty %}
             <li>No reviews yet.</li>
         {% endfor %}
     </div>
-    
+
     {% endblock %}
+	

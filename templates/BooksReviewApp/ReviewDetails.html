@@ -1,0 +1,25 @@
+{% extends 'BooksReviewApp/Menu.html' %}
+    {% block content %}
+        <div>
+        {% for review in review_list1 %}
+            <div>
+                <div>
+                    <h2> {{ review }} </h2>
+                </div>
+            </div>
+        {% endfor %}
+         </div>
+        <div class="reviews">
+        {% for comment in comment_list %}
+            <div class="review">
+                <div class="review_content">
+                    <p>{{ comment.comm_text }}</p>
+                    <p>{{ comment.date }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <li>No comments yet.</li>
+        {% endfor %}
+    </div>
+    
+    {% endblock %}
